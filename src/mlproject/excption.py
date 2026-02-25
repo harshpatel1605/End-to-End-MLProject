@@ -1,5 +1,5 @@
 import sys
-from src.mlroject.logger import logging
+from src.mlproject.logger import logging
 
 def error_message_detail(error  , erroe_detail:sys):
     _,_,exc_tb = erroe_detail.exc_info()
