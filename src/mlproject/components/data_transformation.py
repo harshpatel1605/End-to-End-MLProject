@@ -8,7 +8,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 
-from src.mlproject.excption import CustomException
+from src.mlproject.exception import CustomException
 from src.mlproject.logger import logging
 import os
 from src.mlproject.utils import save_obj

@@ -1,22 +1,47 @@
-from src.mlproject.logger import logging
-from src.mlproject.excption import CustomException
-from src.mlproject.components.data_ingestion import DataIngestion
-from src.mlproject.components.data_ingestion import DataIngestionConfig
-from src.mlproject.components.data_transformation import DataTransformationConfig,DataTransformation
-import sys
+print("Step 1 - App file started")
+from flask import Flask,request,render_template
+import numpy as np
+import pandas as pd
 
-if __name__ == "__main__":
-    logging.info("The execution has started")
+from sklearn.preprocessing import StandardScaler
+from src.mlproject.pipelines.predict_pipeline import CustomData,PredictPipeline
 
-    try:
-        # data_ingestion_config  = DataIngestionConfig()
-        data_ingestion = DataIngestion()
-        train_data_path,test_data_path = data_ingestion.initiate_data_ingestion()
+applicaion = Flask(__name__)
 
-        data_transformatin  = DataTransformation()
-        data_transformatin.initiate_data_transformation(train_data_path,test_data_path)
+app = applicaion
 
-    except Exception as e:
-        logging.info("Custom Exception")
-        raise CustomException(e,sys)
+##Route for home page
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+@app.route('/predictdata',methods=['GET' , 'POST'])
+def predict_datapoint():
+    if request.method == "GET":
+        return render_template('home.html')
+    else:
+        data = CustomData(
+            gender=request.form.get('gender'),
+            race_ethnicity=request.form.get('ethnicity'),
+            parental_level_of_education=request.form.get('parental_level_of_education'),
+            lunch=request.form.get('lunch'),
+            test_preparation_course=request.form.get('test_preparation_course'),
+            reading_score=float(request.form.get('reading_score')),
+            writing_score=float(request.form.get('writing_score'))
+        )
+
+        pred_df = data.get_data_as_data_frame()
+        print(pred_df)
+        predict_pipeline = PredictPipeline()
+        results = predict_pipeline.predict(pred_df)
+
+        return render_template('home.html',results=results[0])
+
+print("Step 2 - Routes defined")
+    
+if __name__ == '__main__':
+    print("Step 3 - Before run")
+    app.run(host="127.0.0.1", port=5000, debug=False)
+
+
+    
