@@ -1,0 +1,37 @@
+/* Background Gradient */
+.bg-gradient {
+    background: linear-gradient(135deg, #4e73df, #1cc88a);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card Styling */
+.form-card {
+    width: 100%;
+    max-width: 750px;
+    border-radius: 15px;
+    background: white;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #4e73df;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #2e59d9;
+    transform: scale(1.02);
+}
+
+/* Form Labels */
+.form-label {
+    font-weight: 500;
+}
+
+/* Input focus effect */
+.form-control:focus,
+.form-select:focus {
+    border-color: #1cc88a;
+    box-shadow: 0 0 5px rgba(28, 200, 138, 0.5);
+}

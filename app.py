@@ -1,4 +1,3 @@
-print("Step 1 - App file started")
 from flask import Flask,request,render_template
 import numpy as np
 import pandas as pd
@@ -37,11 +36,8 @@ def predict_datapoint():
 
         return render_template('home.html',results=results[0])
 
-print("Step 2 - Routes defined")
     
 if __name__ == '__main__':
-    print("Step 3 - Before run")
-    app.run(host="127.0.0.1", port=5000, debug=False)
-
+    app.run(debug=True,host="0.0.0.0",port=5000)
 
     
